@@ -1,7 +1,7 @@
 
 env:
    global:
-     - CONAN_REFERENCE: "bitprim-conan-boost/0.1"
+     - CONAN_REFERENCE: "bitprim-conan-boost/1.64.0"
      - CONAN_USERNAME: "bitprim"
      - CONAN_LOGIN_USERNAME: "dario-ramos"
      - CONAN_CHANNEL: "stable"

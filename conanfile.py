@@ -4,7 +4,7 @@ import os, sys
 
 class BitprimconanboostConan(ConanFile):
     name = "bitprim-conan-boost"
-    version = "0.1"
+    version = "1.64.0"
     license = "http://www.boost.org/LICENSE_1_0.txt"
     url = "https://github.com/bitprim/bitprim-conan-boost/blob/master/conanfile.py"
     description = "Parameterized Conan recipe for Boost"
