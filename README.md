@@ -1,3 +1,3 @@
 # bitprim-conan-boost
 
-Parameterized Conan recipe
+Parameterized Conan recipe for Boost
