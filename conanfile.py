@@ -14,6 +14,8 @@ class BitprimconanboostConan(ConanFile):
     exports = ["FindBoost.cmake", "OriginalFindBoost*"]
     short_paths = True
     FOLDER_NAME = "boost_%s" % version.replace(".", "_")
+    build_policy = "missing" # "always"
+
     options = {
         "shared": [True, False],
         "header_only": [True, False],
@@ -213,10 +215,10 @@ class BitprimconanboostConan(ConanFile):
 
         if not self.options.without_iostreams:
             if self.settings.os == "Linux" or self.settings.os == "Macos":
-                self.build_requires("bzip2/1.0.6@lasote/stable")
+                self.requires("bzip2/1.0.6@lasote/stable")
                 if not self.options.header_only:
                     self.options["bzip2/1.0.6"].shared = self.options.shared
-            self.build_requires("zlib/1.2.11@lasote/stable")
+            self.requires("zlib/1.2.11@lasote/stable")
             if not self.options.header_only:
                 self.options["zlib"].shared = self.options.shared
 
