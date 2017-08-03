@@ -101,17 +101,17 @@ class BitprimconanboostConan(ConanFile):
         "graph_parallel": ["graph_parallel"],
         "iostreams": ["iostreams"],
         "locale": ["locale"],
-        "log": ["log" "log_setup"],
-        "math": ["math_c99" "math_c99f" "math_c99l" "math_tr1" "math_tr1f" "math_tr1l"],
+        "log": ["log", "log_setup"],
+        "math": ["math_c99", "math_c99f", "math_c99l", "math_tr1", "math_tr1f", "math_tr1l"],
         "metaparse": ["metaparse"],
         "mpi": ["mpi"],
         "program_options": ["program_options"],
         "random": ["random"],
         "regex": ["regex"],
-        "serialization": ["serialization" "wserialization"],
+        "serialization": ["serialization", "wserialization"],
         "signals": ["signals"],
         "system": ["system"],
-        "test": ["unit_test_framework" "prg_exec_monitor" "test_exec_monitor"],
+        "test": ["unit_test_framework", "prg_exec_monitor", "test_exec_monitor"],
         "thread": ["thread"],
         "timer": ["timer"],
         "type_erasure": ["type_erasure"],
@@ -293,43 +293,12 @@ class BitprimconanboostConan(ConanFile):
         if self.options.header_only:
             return
 
-        libs_old = ("wave unit_test_framework prg_exec_monitor test_exec_monitor container exception "
-               "graph iostreams locale log log_setup math_c99 math_c99f math_c99l math_tr1 "
-               "math_tr1f math_tr1l program_options random regex wserialization serialization "
-               "signals coroutine context timer thread chrono date_time atomic filesystem system").split()            
-
-        print(libs_old)
-
         #Select binaries to package looking at the options
         libs = []
         for option, option_value in self.options.items():
-            print("option: ")
-            print(option)
-            print("option.startswith...: ")
-            print(option.startswith("without_"))
-            print("option.startswith...: ")
-            print(option.startswith("without_"))
-            # print(self.options[option])
-            print("option_value: ")
-            print(option_value)
-            print("IF VALUE: ")
-            print(option.startswith("without_") and not option_value)
-            
-            # if option.startswith("without_") and not option_value:
-            #     print("inside IF")
-            #     print(self.libs_by_option[option])
-            #     libs.extend(self.libs_by_option[option])
 
-
-            if option.startswith("without_"):
-                print("inside IF 1")
-                if not option_value:
-                    print("inside IF 2")
-                    print(self.libs_by_option[option])
-                    libs.extend(self.libs_by_option[option])
-
-        print("libs")
-        print(libs)
+            if option.startswith("without_") and option_value == "False":
+                libs.extend(self.libs_by_option[option.replace("without_", "")])
 
         if self.settings.compiler != "Visual Studio":
             self.cpp_info.libs.extend(["boost_%s" % lib for lib in libs])
