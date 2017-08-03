@@ -87,35 +87,35 @@ class BitprimconanboostConan(ConanFile):
         "without_wave=True"
 
     libs_by_option = {
-        "atomic": ("atomic"),
-        "chrono": ("chrono"),
-        "container": ("container"),
-        "context": ("context"),
-        "coroutine": ("coroutine"),
-        "coroutine2": ("coroutine2"),
-        "date_time": ("date_time"),
-        "exception": ("exception"),
-        "fiber": ("fiber"),
-        "filesystem": ("filesystem"),
-        "graph": ("graph"),
-        "graph_parallel": ("graph_parallel"),
-        "iostreams": ("iostreams"),
-        "locale": ("locale"),
-        "log": ("log" "log_setup"),
-        "math": ("math_c99" "math_c99f" "math_c99l" "math_tr1" "math_tr1f" "math_tr1l"),
-        "metaparse": ("metaparse"),
-        "mpi": ("mpi"),
-        "program_options": ("program_options"),
-        "random": ("random"),
-        "regex": ("regex"),
-        "serialization": ("serialization" "wserialization"),
-        "signals": ("signals"),
-        "system": ("system"),
-        "test": ("unit_test_framework" "prg_exec_monitor" "test_exec_monitor"),
-        "thread": ("thread"),
-        "timer": ("timer"),
-        "type_erasure": ("type_erasure"),
-        "wave": ("wave")
+        "atomic": ["atomic"],
+        "chrono": ["chrono"],
+        "container": ["container"],
+        "context": ["context"],
+        "coroutine": ["coroutine"],
+        "coroutine2": ["coroutine2"],
+        "date_time": ["date_time"],
+        "exception": ["exception"],
+        "fiber": ["fiber"],
+        "filesystem": ["filesystem"],
+        "graph": ["graph"],
+        "graph_parallel": ["graph_parallel"],
+        "iostreams": ["iostreams"],
+        "locale": ["locale"],
+        "log": ["log" "log_setup"],
+        "math": ["math_c99" "math_c99f" "math_c99l" "math_tr1" "math_tr1f" "math_tr1l"],
+        "metaparse": ["metaparse"],
+        "mpi": ["mpi"],
+        "program_options": ["program_options"],
+        "random": ["random"],
+        "regex": ["regex"],
+        "serialization": ["serialization" "wserialization"],
+        "signals": ["signals"],
+        "system": ["system"],
+        "test": ["unit_test_framework" "prg_exec_monitor" "test_exec_monitor"],
+        "thread": ["thread"],
+        "timer": ["timer"],
+        "type_erasure": ["type_erasure"],
+        "wave": ["wave"]
     }
 
     def build(self):
@@ -308,6 +308,8 @@ class BitprimconanboostConan(ConanFile):
             print(option.startswith("without_"))
             # print(self.options[option])
             print(option_value)
+            print("IF VALUE: ")
+            print(option.startswith("without_") and not option_value)
             if option.startswith("without_") and not option_value:
                 print("inside IF")
                 print(self.libs_by_option[option])
