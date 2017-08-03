@@ -303,6 +303,10 @@ class BitprimconanboostConan(ConanFile):
         #Select binaries to package looking at the options
         libs = []
         for option, option_value in self.options.items():
+            print("option: ")
+            print(option)
+            print(option.startswith("without_"))
+            print(self.options[option])
             if option.startswith("without_") and not self.options[option]:
                 print(self.libs_by_option[option])
                 libs.extend(self.libs_by_option[option])
