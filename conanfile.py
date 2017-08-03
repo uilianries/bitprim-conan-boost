@@ -300,7 +300,7 @@ class BitprimconanboostConan(ConanFile):
         libs = []
         for option in self.options:
             if option.startswith("without_") and self.options[option]:
-                libs.append(self.libs_by_option[option])
+                libs.extend(self.libs_by_option[option])
 
         if self.settings.compiler != "Visual Studio":
             self.cpp_info.libs.extend(["boost_%s" % lib for lib in libs])
