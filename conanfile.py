@@ -307,7 +307,8 @@ class BitprimconanboostConan(ConanFile):
             print(option)
             print(option.startswith("without_"))
             print(self.options[option])
-            if option.startswith("without_") and not self.options[option]:
+            print(option_value)
+            if option.startswith("without_") and not option_value:
                 print(self.libs_by_option[option])
                 libs.extend(self.libs_by_option[option])
 
