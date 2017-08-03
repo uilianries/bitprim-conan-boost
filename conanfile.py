@@ -299,7 +299,8 @@ class BitprimconanboostConan(ConanFile):
         #        "signals coroutine context timer thread chrono date_time atomic filesystem system").split()
         libs = []
         print(self.options)
-        for option in self.options:
+        # for option in self.options:
+        for option, option_value in self.options.items():
             print(option)
             print(option.startswith("without_"))
             print(self.options[option])
