@@ -255,10 +255,15 @@ class BitprimconanboostConan(ConanFile):
         if self.options.header_only:
             return
 
-        libs = ("wave unit_test_framework prg_exec_monitor test_exec_monitor container exception "
-                "graph iostreams locale log log_setup math_c99 math_c99f math_c99l math_tr1 "
-                "math_tr1f math_tr1l program_options random regex wserialization serialization "
-                "signals coroutine context timer thread chrono date_time atomic filesystem system").split()
+        #libs = ("wave unit_test_framework prg_exec_monitor test_exec_monitor container exception "
+        #        "graph iostreams locale log log_setup math_c99 math_c99f math_c99l math_tr1 "
+        #        "math_tr1f math_tr1l program_options random regex wserialization serialization "
+        #        "signals coroutine context timer thread chrono date_time atomic filesystem system").split()
+        libs = ()
+        for option in self.options:
+            if option.startswith("without_") and not self.options[option]
+                libs += option.replace("without_", "")
+
 
         if self.settings.compiler != "Visual Studio":
             self.cpp_info.libs.extend(["boost_%s" % lib for lib in libs])
