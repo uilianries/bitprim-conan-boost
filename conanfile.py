@@ -297,13 +297,10 @@ class BitprimconanboostConan(ConanFile):
         #        "graph iostreams locale log log_setup math_c99 math_c99f math_c99l math_tr1 "
         #        "math_tr1f math_tr1l program_options random regex wserialization serialization "
         #        "signals coroutine context timer thread chrono date_time atomic filesystem system").split()
-        libs_str = ""
+        libs = []
         for option in self.options:
             if option.startswith("without_") and self.options[option]:
-                libs += self.libs_by_option[option] + " "
-        if libs_str != "":
-            libs_str = libs_str[:-1]
-        libs = libs_str.split()
+                libs.append(self.libs_by_option[option])
 
         if self.settings.compiler != "Visual Studio":
             self.cpp_info.libs.extend(["boost_%s" % lib for lib in libs])
