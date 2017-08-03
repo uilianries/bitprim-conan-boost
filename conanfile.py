@@ -305,15 +305,28 @@ class BitprimconanboostConan(ConanFile):
         for option, option_value in self.options.items():
             print("option: ")
             print(option)
+            print("option.startswith...: ")
+            print(option.startswith("without_"))
+            print("option.startswith...: ")
             print(option.startswith("without_"))
             # print(self.options[option])
+            print("option_value: ")
             print(option_value)
             print("IF VALUE: ")
             print(option.startswith("without_") and not option_value)
-            if option.startswith("without_") and not option_value:
-                print("inside IF")
-                print(self.libs_by_option[option])
-                libs.extend(self.libs_by_option[option])
+            
+            # if option.startswith("without_") and not option_value:
+            #     print("inside IF")
+            #     print(self.libs_by_option[option])
+            #     libs.extend(self.libs_by_option[option])
+
+
+            if option.startswith("without_"):
+                print("inside IF 1")
+                if not option_value:
+                    print("inside IF 2")
+                    print(self.libs_by_option[option])
+                    libs.extend(self.libs_by_option[option])
 
         print("libs")
         print(libs)
