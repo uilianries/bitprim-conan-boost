@@ -299,7 +299,7 @@ class BitprimconanboostConan(ConanFile):
         #        "signals coroutine context timer thread chrono date_time atomic filesystem system").split()
         libs = []
         for option in self.options:
-            if option.startswith("without_") and self.options[option]:
+            if option.startswith("without_") and not self.options[option]:
                 libs.extend(self.libs_by_option[option])
 
         if self.settings.compiler != "Visual Studio":
