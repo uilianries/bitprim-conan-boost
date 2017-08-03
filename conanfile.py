@@ -298,12 +298,7 @@ class BitprimconanboostConan(ConanFile):
         #        "math_tr1f math_tr1l program_options random regex wserialization serialization "
         #        "signals coroutine context timer thread chrono date_time atomic filesystem system").split()
         libs = []
-        print(self.options)
-        # for option in self.options:
         for option, option_value in self.options.items():
-            print(option)
-            print(option.startswith("without_"))
-            print(self.options[option])
             if option.startswith("without_") and not self.options[option]:
                 libs.extend(self.libs_by_option[option])
 
