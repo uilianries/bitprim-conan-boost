@@ -293,17 +293,9 @@ class BitprimconanboostConan(ConanFile):
         if self.options.header_only:
             return
 
-        #libs = ("wave unit_test_framework prg_exec_monitor test_exec_monitor container exception "
-        #        "graph iostreams locale log log_setup math_c99 math_c99f math_c99l math_tr1 "
-        #        "math_tr1f math_tr1l program_options random regex wserialization serialization "
-        #        "signals coroutine context timer thread chrono date_time atomic filesystem system").split()
+        #Select binaries to package looking at the options
         libs = []
-        print(self.options)
         for option, option_value in self.options.items():
-            print(option)
-            print(self.options[option])
-            option_val_str = getattr(self.options, option)
-            print(option_val_str)
             if option.startswith("without_") and not self.options[option]:
                 libs.extend(self.libs_by_option[option])
 
