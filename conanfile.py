@@ -29,6 +29,7 @@ class BitprimconanboostConan(ConanFile):
         "without_coroutine2": [True, False],
         "without_date_time": [True, False],
         "without_exception": [True, False],
+        "without_fiber": [True, False],
         "without_filesystem": [True, False],
         "without_graph": [True, False],
         "without_graph_parallel": [True, False],
@@ -36,6 +37,7 @@ class BitprimconanboostConan(ConanFile):
         "without_locale": [True, False],
         "without_log": [True, False],
         "without_math": [True, False],
+        "without_metaparse": [True, False],
         "without_mpi": [True, False],
         "without_program_options": [True, False],
         "without_random": [True, False],
@@ -62,6 +64,7 @@ class BitprimconanboostConan(ConanFile):
         "without_coroutine2=True", \
         "without_date_time=False", \
         "without_exception=True", \
+        "without_fiber=True", \
         "without_filesystem=False", \
         "without_graph=True", \
         "without_graph_parallel=True", \
@@ -69,6 +72,7 @@ class BitprimconanboostConan(ConanFile):
         "without_locale=False", \
         "without_log=False", \
         "without_math=True", \
+        "without_metaparse=True", \
         "without_mpi=True", \
         "without_program_options=False", \
         "without_random=False", \
@@ -124,6 +128,7 @@ class BitprimconanboostConan(ConanFile):
             "--without-coroutine2": self.options.without_coroutine2,
             "--without-date_time": self.options.without_date_time,
             "--without-exception": self.options.without_exception,
+            "--without-fiber": self.options.without_fiber,
             "--without-filesystem": self.options.without_filesystem,
             "--without-graph": self.options.without_graph,
             "--without-graph_parallel": self.options.without_graph_parallel,
@@ -131,6 +136,7 @@ class BitprimconanboostConan(ConanFile):
             "--without-locale": self.options.without_locale,
             "--without-log": self.options.without_log,
             "--without-math": self.options.without_math,
+            "--without-metaparse": self.options.without_metaparse,
             "--without-mpi": self.options.without_mpi,
             "--without-program_options": self.options.without_program_options,
             "--without-random": self.options.without_random,
