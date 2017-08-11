@@ -126,7 +126,7 @@ class BitprimconanboostConan(ConanFile):
         toolset = "darwin" if self.settings.os == "Macos" else self.settings.compiler
         
         # command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh --with-toolset=%s" % self.settings.compiler
-        command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh --with-toolset=%s" % toolset
+        command = "bootstrap" if (self.settings.os == "Windows" and self.settings.compiler == "Visual Studio") else "./bootstrap.sh --with-toolset=%s" % toolset
         
         try:
             self.run("cd %s && %s" % (self.FOLDER_NAME, command))
