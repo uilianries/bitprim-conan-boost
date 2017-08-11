@@ -126,7 +126,14 @@ class BitprimconanboostConan(ConanFile):
         toolset = "darwin" if self.settings.os == "Macos" else self.settings.compiler
         
         # command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh --with-toolset=%s" % self.settings.compiler
-        command = "bootstrap" if (self.settings.os == "Windows" and self.settings.compiler == "Visual Studio") else "./bootstrap.sh --with-toolset=%s" % toolset
+        command = ""
+        if self.settings.os == "Windows":
+            if self.settings.compiler == "gcc":
+                command = "bootstrap gcc"
+            else:
+                command = "bootstrap"
+        else:
+            command = "./bootstrap.sh --with-toolset=%s" % toolset
         
         try:
             self.run("cd %s && %s" % (self.FOLDER_NAME, command))
@@ -143,6 +150,7 @@ class BitprimconanboostConan(ConanFile):
             # For GCC we only need the major version otherwhise Boost doesn't find the compiler
             #flags.append("toolset=%s-%s"% (self.settings.compiler, self._gcc_short_version(self.settings.compiler.version)))
             flags.append("toolset=gcc")
+
         elif str(self.settings.compiler) in ["clang"]:
             flags.append("toolset=%s-%s"% (self.settings.compiler, self.settings.compiler.version))
 
