@@ -21,7 +21,7 @@ env:
    global:
      - CONAN_REFERENCE: "bitprim-conan-boost/1.64.0"
      - CONAN_USERNAME: "bitprim"
-     - CONAN_LOGIN_USERNAME: "dario-ramos"
+     - CONAN_LOGIN_USERNAME: "bitprim@bitprim"
      - CONAN_CHANNEL: "stable"
      - CONAN_UPLOAD: "https://api.bintray.com/conan/bitprim/bitprim"
 
