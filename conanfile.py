@@ -304,12 +304,12 @@ class BitprimconanboostConan(ConanFile):
         #Select binaries to package looking at the options
         libs = []
         for option, option_value in self.options.items():
-
             if option.startswith("without_") and option_value == "False":
                 libs.extend(self.libs_by_option[option.replace("without_", "")])
 
         if self.settings.compiler != "Visual Studio":
-            self.cpp_info.libs.extend(["boost_%s" % lib for lib in libs])
+            # self.cpp_info.libs.extend(["boost_%s" % lib for lib in libs])
+            self.cpp_info.libs = self.collect_libs()
         else:
             win_libs = []
             # http://www.boost.org/doc/libs/1_55_0/more/getting_started/windows.html
