@@ -313,7 +313,7 @@ class BitprimconanboostConan(ConanFile):
 
 
         # if self.settings.compiler != "Visual Studio":
-        if self.settings.os == "Windows":
+        if self.settings.os != "Windows":
             self.cpp_info.libs.extend(["boost_%s" % lib for lib in libs])
             # self.cpp_info.libs = self.collect_libs()
 
