@@ -63,7 +63,7 @@ class BitprimconanboostConan(ConanFile):
         "without_coroutine=True", \
         "without_coroutine2=True", \
         "without_date_time=False", \
-        "without_exception=True", \
+        "without_exception=False", \
         "without_fiber=True", \
         "without_filesystem=False", \
         "without_graph=True", \
