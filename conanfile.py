@@ -310,7 +310,7 @@ class BitprimconanboostConan(ConanFile):
 
         
 
-        
+
 
         # if self.settings.compiler != "Visual Studio":
         if self.settings.os == "Windows":
@@ -353,7 +353,7 @@ class BitprimconanboostConan(ConanFile):
                 self.cpp_info.defines.extend(["BOOST_ALL_NO_LIB"]) # DISABLES AUTO LINKING! NO SMART AND MAGIC DECISIONS THANKS!
             else:
                 win_libs = []
-                mingw_version = self.settings.compiler.version
+                mingw_version = self._mingw_version()
                 runtime = "mt" # str(self.settings.compiler.runtime).lower()
 
                 abi_tags = []
@@ -404,6 +404,9 @@ class BitprimconanboostConan(ConanFile):
             return "14.1"
         else:
             return "%s.0" % self.settings.compiler.version
+
+    def _mingw_version(self):
+        return "%s.0" % self.settings.compiler.version
 
     def _gcc_short_version(self, version):
         return str(version)[0]
