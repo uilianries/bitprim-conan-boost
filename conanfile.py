@@ -342,9 +342,7 @@ class BitprimconanboostConan(ConanFile):
 
                 
                 suffix = "vc%s-%s%s-%s" %  (visual_version.replace(".", ""), runtime, abi_tags, version)
-                #prefix = "lib" if not self.options.shared else ""
-                prefix = ""
-
+                prefix = "lib" if not self.options.shared else ""
 
                 win_libs.extend(["%sboost_%s-%s" % (prefix, lib, suffix) for lib in libs if lib not in ["exception", "test_exec_monitor"]])
                 win_libs.extend(["libboost_exception-%s" % suffix, "libboost_test_exec_monitor-%s" % suffix])
@@ -365,7 +363,8 @@ class BitprimconanboostConan(ConanFile):
                 abi_tags = ("-%s" % "".join(abi_tags)) if abi_tags else ""
 
                 suffix = "mgw%s-%s%s-%s" %  (mingw_version.replace(".", ""), runtime, abi_tags, version)
-                prefix = "lib" if not self.options.shared else ""
+                #prefix = "lib" if not self.options.shared else ""
+                prefix = ""
 
                 win_libs.extend(["%sboost_%s-%s" % (prefix, lib, suffix) for lib in libs if lib not in ["exception", "test_exec_monitor"]])
                 win_libs.extend(["libboost_exception-%s" % suffix, "libboost_test_exec_monitor-%s" % suffix])
