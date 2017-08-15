@@ -342,7 +342,8 @@ class BitprimconanboostConan(ConanFile):
 
                 
                 suffix = "vc%s-%s%s-%s" %  (visual_version.replace(".", ""), runtime, abi_tags, version)
-                prefix = "lib" if not self.options.shared else ""
+                #prefix = "lib" if not self.options.shared else ""
+                prefix = ""
 
 
                 win_libs.extend(["%sboost_%s-%s" % (prefix, lib, suffix) for lib in libs if lib not in ["exception", "test_exec_monitor"]])
@@ -406,7 +407,7 @@ class BitprimconanboostConan(ConanFile):
             return "%s.0" % self.settings.compiler.version
 
     def _mingw_version(self):
-        return "%s.0" % self.settings.compiler.version
+        return "%s" % self.settings.compiler.version
 
     def _gcc_short_version(self, version):
         return str(version)[0]
