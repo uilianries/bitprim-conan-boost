@@ -1,6 +1,7 @@
-from conans import ConanFile, CMake
-from conans import tools
-import os, sys
+import os
+import sys
+from conans import ConanFile, tools
+
 
 class BitprimconanboostConan(ConanFile):
     name = "bitprim-conan-boost"
@@ -307,9 +308,14 @@ class BitprimconanboostConan(ConanFile):
             if option.startswith("without_") and option_value == "False":
                 libs.extend(self.libs_by_option[option.replace("without_", "")])
 
+        # if self.settings.os == "Windows":
+
         if self.settings.compiler != "Visual Studio":
             # self.cpp_info.libs.extend(["boost_%s" % lib for lib in libs])
             self.cpp_info.libs = self.collect_libs()
+            print("self.cpp_info.libs")
+            print(self.cpp_info.libs)
+
         else:
             win_libs = []
             # http://www.boost.org/doc/libs/1_55_0/more/getting_started/windows.html
