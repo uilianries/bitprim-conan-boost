@@ -1,6 +1,7 @@
-from conans import ConanFile, CMake
-from conans import tools
-import os, sys
+import os
+import sys
+from conans import ConanFile, tools
+
 
 class BitprimconanboostConan(ConanFile):
     name = "bitprim-conan-boost"
@@ -304,38 +305,79 @@ class BitprimconanboostConan(ConanFile):
         #Select binaries to package looking at the options
         libs = []
         for option, option_value in self.options.items():
-
             if option.startswith("without_") and option_value == "False":
                 libs.extend(self.libs_by_option[option.replace("without_", "")])
 
-        if self.settings.compiler != "Visual Studio":
+        
+
+
+
+        # if self.settings.compiler != "Visual Studio":
+        if self.settings.os != "Windows":
             self.cpp_info.libs.extend(["boost_%s" % lib for lib in libs])
+            # self.cpp_info.libs = self.collect_libs()
+
+            print("self.cpp_info.libs")
+            print(self.cpp_info.libs)
+            
+            print("self.collect_libs()")
+            print(self.collect_libs())
+
         else:
-            win_libs = []
             # http://www.boost.org/doc/libs/1_55_0/more/getting_started/windows.html
-            visual_version = self._msvc_version()
-            runtime = "mt" # str(self.settings.compiler.runtime).lower()
-
-            abi_tags = []
-            if self.settings.compiler.runtime in ("MTd", "MT"):
-                abi_tags.append("s")
-
-            if self.settings.build_type == "Debug":
-                abi_tags.append("gd")
-
-            abi_tags = ("-%s" % "".join(abi_tags)) if abi_tags else ""
-
             version = "_".join(self.version.split(".")[0:2])
-            suffix = "vc%s-%s%s-%s" %  (visual_version.replace(".", ""), runtime, abi_tags, version)
-            prefix = "lib" if not self.options.shared else ""
+            if self.settings.compiler == "Visual Studio":
+                win_libs = []
+                visual_version = self._msvc_version()
+                runtime = "mt" # str(self.settings.compiler.runtime).lower()
 
+                abi_tags = []
+                if self.settings.compiler.runtime in ("MTd", "MT"):
+                    abi_tags.append("s")
 
-            win_libs.extend(["%sboost_%s-%s" % (prefix, lib, suffix) for lib in libs if lib not in ["exception", "test_exec_monitor"]])
-            win_libs.extend(["libboost_exception-%s" % suffix, "libboost_test_exec_monitor-%s" % suffix])
+                if self.settings.build_type == "Debug":
+                    abi_tags.append("gd")
 
-            #self.output.warn("EXPORTED BOOST LIBRARIES: %s" % win_libs)
-            self.cpp_info.libs.extend(win_libs)
-            self.cpp_info.defines.extend(["BOOST_ALL_NO_LIB"]) # DISABLES AUTO LINKING! NO SMART AND MAGIC DECISIONS THANKS!
+                abi_tags = ("-%s" % "".join(abi_tags)) if abi_tags else ""
+
+                
+                suffix = "vc%s-%s%s-%s" %  (visual_version.replace(".", ""), runtime, abi_tags, version)
+                prefix = "lib" if not self.options.shared else ""
+
+                win_libs.extend(["%sboost_%s-%s" % (prefix, lib, suffix) for lib in libs if lib not in ["exception", "test_exec_monitor"]])
+                win_libs.extend(["libboost_exception-%s" % suffix, "libboost_test_exec_monitor-%s" % suffix])
+
+                #self.output.warn("EXPORTED BOOST LIBRARIES: %s" % win_libs)
+                self.cpp_info.libs.extend(win_libs)
+                self.cpp_info.defines.extend(["BOOST_ALL_NO_LIB"]) # DISABLES AUTO LINKING! NO SMART AND MAGIC DECISIONS THANKS!
+            else:
+                win_libs = []
+                mingw_version = self._mingw_version()
+                runtime = "mt" # str(self.settings.compiler.runtime).lower()
+
+                abi_tags = []
+
+                if self.settings.build_type == "Debug":
+                    abi_tags.append("gd")
+
+                abi_tags = ("-%s" % "".join(abi_tags)) if abi_tags else ""
+
+                suffix = "mgw%s-%s%s-%s" %  (mingw_version.replace(".", ""), runtime, abi_tags, version)
+                #prefix = "lib" if not self.options.shared else ""
+                prefix = ""
+
+                win_libs.extend(["%sboost_%s-%s" % (prefix, lib, suffix) for lib in libs if lib not in ["exception", "test_exec_monitor"]])
+                win_libs.extend(["libboost_exception-%s" % suffix, "libboost_test_exec_monitor-%s" % suffix])
+
+                #self.output.warn("EXPORTED BOOST LIBRARIES: %s" % win_libs)
+                self.cpp_info.libs.extend(win_libs)
+                self.cpp_info.defines.extend(["BOOST_ALL_NO_LIB"]) # DISABLES AUTO LINKING! NO SMART AND MAGIC DECISIONS THANKS!
+
+# # if self.settings.os == "Windows":
+# libboost_atomic-vc140-mt-s-1_64.lib
+# libboost_atomic-mgw71-mt-1_64.a
+# libboost_chrono-vc140-mt-s-1_64.lib
+
 
     def prepare_deps_options_env(self):
         ret = {}
@@ -362,6 +404,9 @@ class BitprimconanboostConan(ConanFile):
             return "14.1"
         else:
             return "%s.0" % self.settings.compiler.version
+
+    def _mingw_version(self):
+        return "%s" % self.settings.compiler.version
 
     def _gcc_short_version(self, version):
         return str(version)[0]
