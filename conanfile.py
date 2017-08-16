@@ -120,21 +120,15 @@ class BitprimconanboostConan(ConanFile):
     }
 
     def build(self):
-        print(str(self.settings.compiler.libcxx))
 
+        #TODO Force it until Conan provides a better alternative (i.e. alter profile programatically)
         if self.settings.os == "Windows":
             if self.settings.compiler == "gcc":
-                # self.settings.update({"compiler.libcxx": "libstdc++11"})
                 self.settings.compiler.libcxx = "libstdc++11"
         else:
             if self.settings.compiler.libcxx == "libstdc++":
-                # self.settings.update({"compiler.libcxx": "libstdc++11"})
                 self.settings.compiler.libcxx = "libstdc++11"
 
-        print(str(self.settings.compiler.libcxx))
-			
-			
-			
         if self.options.header_only:
             self.output.warn("Header only package, skipping build")
             return
@@ -222,7 +216,6 @@ class BitprimconanboostConan(ConanFile):
 
         # LIBCXX DEFINITION FOR BOOST B2
         try:
-            print(str(self.settings.compiler.libcxx))
             if str(self.settings.compiler.libcxx) == "libstdc++":
                 print("define=_GLIBCXX_USE_CXX11_ABI=0")
                 flags.append("define=_GLIBCXX_USE_CXX11_ABI=0")
@@ -415,24 +408,6 @@ class BitprimconanboostConan(ConanFile):
         return ret
 
     def source(self):
-    
-        print(str(self.settings.compiler.libcxx))
-
-        if self.settings.os == "Windows":
-            if self.settings.compiler == "gcc":
-                # self.settings.update({"compiler.libcxx": "libstdc++11"})
-                self.settings.compiler.libcxx = "libstdc++11"
-        else:
-            if self.settings.compiler.libcxx == "libstdc++":
-                # self.settings.update({"compiler.libcxx": "libstdc++11"})
-                self.settings.compiler.libcxx = "libstdc++11"
-
-        print(str(self.settings.compiler.libcxx))
-			
-			
-            
-            
-    
         zip_name = "%s.zip" % self.FOLDER_NAME if sys.platform == "win32" else "%s.tar.gz" % self.FOLDER_NAME
         url = "http://sourceforge.net/projects/boost/files/boost/%s/%s/download" % (self.version, zip_name)
         self.output.info("Downloading %s..." % url)
