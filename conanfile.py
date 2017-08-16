@@ -367,7 +367,7 @@ class BitprimconanboostConan(ConanFile):
                 prefix = ""
 
                 win_libs.extend(["%sboost_%s-%s" % (prefix, lib, suffix) for lib in libs if lib not in ["exception", "test_exec_monitor"]])
-                win_libs.extend(["libboost_exception-%s" % suffix, "libboost_test_exec_monitor-%s" % suffix])
+                win_libs.extend(["boost_exception-%s" % suffix, "boost_test_exec_monitor-%s" % suffix])
 
                 #self.output.warn("EXPORTED BOOST LIBRARIES: %s" % win_libs)
                 self.cpp_info.libs.extend(win_libs)
