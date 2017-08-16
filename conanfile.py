@@ -207,13 +207,15 @@ class BitprimconanboostConan(ConanFile):
 
         # LIBCXX DEFINITION FOR BOOST B2
         try:
-            print(str(self.settings.compiler.libcxx))
-            if str(self.settings.compiler.libcxx) == "libstdc++":
-                print("define=_GLIBCXX_USE_CXX11_ABI=0")
-                flags.append("define=_GLIBCXX_USE_CXX11_ABI=0")
-            elif str(self.settings.compiler.libcxx) == "libstdc++11":
-                print("define=_GLIBCXX_USE_CXX11_ABI=1")
-                flags.append("define=_GLIBCXX_USE_CXX11_ABI=1")
+            # print(str(self.settings.compiler.libcxx))
+            # if str(self.settings.compiler.libcxx) == "libstdc++":
+            #     print("define=_GLIBCXX_USE_CXX11_ABI=0")
+            #     flags.append("define=_GLIBCXX_USE_CXX11_ABI=0")
+            # elif str(self.settings.compiler.libcxx) == "libstdc++11":
+            #     print("define=_GLIBCXX_USE_CXX11_ABI=1")
+            #     flags.append("define=_GLIBCXX_USE_CXX11_ABI=1")
+
+            flags.append("define=_GLIBCXX_USE_CXX11_ABI=1")
 
             if "clang" in str(self.settings.compiler):
                 if str(self.settings.compiler.libcxx) == "libc++":
