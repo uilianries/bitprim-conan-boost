@@ -5,7 +5,7 @@ import platform
 if __name__ == "__main__":
     builder = ConanMultiPackager(username="bitprim", channel="stable")
     builder.add_common_builds(shared_option_name="bitprim-conan-boost:shared")
-    builder.password = os.getenv("CONAN_PASSWORD")
+    #builder.password = os.getenv("CONAN_PASSWORD") #Redundant
 
 
     filtered_builds = []
@@ -13,12 +13,11 @@ if __name__ == "__main__":
         # filtered_builds.append([settings, options, env_vars, build_requires])
         print(settings)
         print(options)
-        print("platform.system: %s" % platform.system())
         if settings["build_type"] == "Release" \
                 and settings["arch"] == "x86_64" \
                 and options["bitprim-conan-boost:shared"] == False:
             #TODO Test
-            if settings["os"] == "Windows":
+            if platform.system() == "Windows":
                  if settings["compiler"] == "gcc":
                     settings["compiler.libcxx"] = "libstdc++11"
             else:
