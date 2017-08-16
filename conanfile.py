@@ -78,7 +78,7 @@ class BitprimconanboostConan(ConanFile):
         "without_program_options=False", \
         "without_random=False", \
         "without_regex=False", \
-        "without_serialization=True", \
+        "without_serialization=False", \
         "without_signals=True", \
         "without_system=False", \
         "without_test=False", \
