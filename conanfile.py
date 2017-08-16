@@ -145,19 +145,21 @@ class BitprimconanboostConan(ConanFile):
             raise
 
         flags = []
+
         if self.settings.compiler == "Visual Studio":
             flags.append("toolset=msvc-%s" % self._msvc_version())
         elif self.settings.compiler == "gcc":
             # For GCC we only need the major version otherwhise Boost doesn't find the compiler
             #flags.append("toolset=%s-%s"% (self.settings.compiler, self._gcc_short_version(self.settings.compiler.version)))
             flags.append("toolset=gcc")
-
         elif str(self.settings.compiler) in ["clang"]:
             flags.append("toolset=%s-%s"% (self.settings.compiler, self.settings.compiler.version))
 
         flags.append("link=%s" % ("static" if not self.options.shared else "shared"))
+
         if self.settings.compiler == "Visual Studio" and self.settings.compiler.runtime:
             flags.append("runtime-link=%s" % ("static" if "MT" in str(self.settings.compiler.runtime) else "shared"))
+        
         flags.append("variant=%s" % str(self.settings.build_type).lower())
         flags.append("address-model=%s" % ("32" if self.settings.arch == "x86" else "64"))
 
@@ -205,10 +207,14 @@ class BitprimconanboostConan(ConanFile):
 
         # LIBCXX DEFINITION FOR BOOST B2
         try:
+            print(str(self.settings.compiler.libcxx))
             if str(self.settings.compiler.libcxx) == "libstdc++":
+                print("define=_GLIBCXX_USE_CXX11_ABI=0")
                 flags.append("define=_GLIBCXX_USE_CXX11_ABI=0")
             elif str(self.settings.compiler.libcxx) == "libstdc++11":
+                print("define=_GLIBCXX_USE_CXX11_ABI=1")
                 flags.append("define=_GLIBCXX_USE_CXX11_ABI=1")
+
             if "clang" in str(self.settings.compiler):
                 if str(self.settings.compiler.libcxx) == "libc++":
                     cxx_flags.append("-stdlib=libc++")
