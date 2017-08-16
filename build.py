@@ -12,6 +12,7 @@ if __name__ == "__main__":
         # filtered_builds.append([settings, options, env_vars, build_requires])
         print(settings)
         print(options)
+        print("platform.system: %s" % platform.system)
         if settings["build_type"] == "Release" \
                 and settings["arch"] == "x86_64" \
                 and options["bitprim-conan-boost:shared"] == False:
