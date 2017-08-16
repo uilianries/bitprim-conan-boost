@@ -122,12 +122,12 @@ class BitprimconanboostConan(ConanFile):
     def build(self):
 
         #TODO Force it until Conan provides a better alternative (i.e. alter profile programatically)
-        if self.settings.os == "Windows":
-            if self.settings.compiler == "gcc":
-                self.settings.compiler.libcxx = "libstdc++11"
-        else:
-            if self.settings.compiler.libcxx == "libstdc++":
-                self.settings.compiler.libcxx = "libstdc++11"
+        #if self.settings.os == "Windows":
+        #    if self.settings.compiler == "gcc":
+        #        self.settings.compiler.libcxx = "libstdc++11"
+        #else:
+        #    if self.settings.compiler.libcxx == "libstdc++":
+        #        self.settings.compiler.libcxx = "libstdc++11"
 
         if self.options.header_only:
             self.output.warn("Header only package, skipping build")
