@@ -217,7 +217,7 @@ class BitprimconanboostConan(ConanFile):
                     cxx_flags.append("-stdlib=libstdc++")
                     cxx_flags.append("-std=c++11")
         except BaseException as e:
-            self.output.warn(e.message)
+            self.output.warn(str(e))
 
         cxx_flags = 'cxxflags="%s"' % " ".join(cxx_flags) if cxx_flags else ""
         flags.append(cxx_flags)
