@@ -120,8 +120,8 @@ class BitprimconanboostConan(ConanFile):
     }
 
     def build(self):
-		if self.settings.os != "Windows":
-			self.settings.update({"compiler.libcxx": "libstdc++11"})
+        if self.settings.os != "Windows":
+            self.settings.update({"compiler.libcxx": "libstdc++11"})
         if self.options.header_only:
             self.output.warn("Header only package, skipping build")
             return
