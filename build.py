@@ -4,7 +4,7 @@ import os
 if __name__ == "__main__":
     builder = ConanMultiPackager(username="bitprim", channel="stable")
     builder.add_common_builds(shared_option_name="bitprim-conan-boost:shared")
-    builder.password = os.getenv("CONAN_PASSWORD")
+    # builder.password = os.getenv("CONAN_PASSWORD")
 
 
     filtered_builds = []
