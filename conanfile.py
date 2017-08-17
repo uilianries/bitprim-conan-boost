@@ -236,6 +236,17 @@ class BitprimconanboostConan(ConanFile):
 
             #flags.append("define=_GLIBCXX_USE_CXX11_ABI=1")
 
+
+
+            cxx_flags.append("-std=c++11")  # always C++11 (at minimum)
+ 
+            if self.settings.compiler == "gcc":
+                if float(self.settings.compiler.version) >= 5):
+                    flags.append("define=_GLIBCXX_USE_CXX11_ABI=1")
+                else:
+                    flags.append("define=_GLIBCXX_USE_CXX11_ABI=0")
+
+
             if "clang" in str(self.settings.compiler):
                 if str(self.settings.compiler.libcxx) == "libc++":
                     cxx_flags.append("-stdlib=libc++")
