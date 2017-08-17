@@ -18,12 +18,12 @@ if __name__ == "__main__":
                 and settings["arch"] == "x86_64" \
                 and options["bitprim-conan-boost:shared"] == False:
             #TODO Test
-            if platform.system() == "Windows":
-                 if settings["compiler"] == "gcc":
-                    settings["compiler.libcxx"] = "libstdc++11"
-            else:
-                if settings["compiler.libcxx"] == "libstdc++":
-                    settings["compiler.libcxx"] = "libstdc++11"
+            #if platform.system() == "Windows":
+            #     if settings["compiler"] == "gcc":
+            #        settings["compiler.libcxx"] = "libstdc++11"
+            #else:
+            #    if settings["compiler.libcxx"] == "libstdc++":
+            #        settings["compiler.libcxx"] = "libstdc++11"
             filtered_builds.append([settings, options, env_vars, build_requires])        
 
     builder.builds = filtered_builds
