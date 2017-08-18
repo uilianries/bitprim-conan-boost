@@ -15,12 +15,12 @@ if __name__ == "__main__":
         if settings["build_type"] == "Release" \
                 and settings["arch"] == "x86_64" \
                 and options["bitprim-conan-boost:shared"] == False:
-            #TODO: Adding manually until Conan fixes it
+            #TODO: Adding gcc 4.9 c++11 build manually until Conan fixes it
             if settings["compiler"] == "gcc" and settings["compiler.version"] == "4.9":
                 builder.add(settings={'compiler.version': '4.9', 'compiler.libcxx': 'libstdc++11', 'arch': 'x86_64', 'build_type': 'Release', 'compiler': 'gcc'}, options={'bitprim-conan-boost:shared': False})
             else:
-                filtered_builds.append([settings, options, env_vars, build_requires])
-
+                if not "compiler.libcxx" in settings or ("compiler.libcxx" in settings and settings["compiler.libcxx"] == "libstdc++"):
+                    filtered_builds.append([settings, options, env_vars, build_requires])
 
     builder.builds = filtered_builds
     builder.run()
