@@ -8,6 +8,7 @@ if __name__ == "__main__":
     builder.add_common_builds(shared_option_name="bitprim-conan-boost:shared", pure_c=False)
     #builder.password = os.getenv("CONAN_PASSWORD") #Redundant
 
+    builder.add(settings={'compiler.version': '4.9', 'compiler.libcxx': 'libstdc++11', 'arch': 'x86_64', 'build_type': 'Release', 'compiler': 'gcc'}, options={'bitprim-conan-boost:shared': False})
 
     filtered_builds = []
     for settings, options, env_vars, build_requires in builder.builds:
