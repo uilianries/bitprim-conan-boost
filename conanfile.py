@@ -260,6 +260,7 @@ class BitprimconanboostConan(ConanFile):
         cxx_flags = 'cxxflags="%s"' % " ".join(cxx_flags) if cxx_flags else ""
         flags.append(cxx_flags)
         flags.append("--without-python")
+        flags.append("-d 2") #Verbosity (from 1 to 13)
 
         # JOIN ALL FLAGS
         b2_flags = " ".join(flags)
