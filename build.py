@@ -4,7 +4,7 @@ import platform
 
 if __name__ == "__main__":
     #TODO Specify combinations here using archs argument
-    builder = ConanMultiPackager(username="bitprim", channel="stable")
+    builder = ConanMultiPackager(username="bitprim", channel="stable", archs="x86_64")
     builder.add_common_builds(shared_option_name="bitprim-conan-boost:shared", pure_c=False)
 
     filtered_builds = []
@@ -13,7 +13,6 @@ if __name__ == "__main__":
         print(settings)
         print(options)
         if settings["build_type"] == "Release" \
-                and settings["arch"] == "x86_64" \
                 and options["bitprim-conan-boost:shared"] == False:
             #TODO: Adding gcc 4.9 c++11 build manually until Conan fixes it
             if settings["compiler"] == "gcc" and settings["compiler.version"] == "4.9":
