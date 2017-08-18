@@ -19,7 +19,7 @@ if __name__ == "__main__":
             if settings["compiler"] == "gcc" and settings["compiler.version"] == "4.9":
                 builder.add(settings={'compiler.version': '4.9', 'compiler.libcxx': 'libstdc++11', 'arch': 'x86_64', 'build_type': 'Release', 'compiler': 'gcc'}, options={'bitprim-conan-boost:shared': False})
             else:
-                if not "compiler.libcxx" in settings or ("compiler.libcxx" in settings and settings["compiler.libcxx"] == "libstdc++"):
+                if not "compiler.libcxx" in settings or settings["compiler"] == "apple-clang" or ("compiler.libcxx" in settings and settings["compiler.libcxx"] == "libstdc++"):
                     filtered_builds.append([settings, options, env_vars, build_requires])
 
     builder.builds = filtered_builds
