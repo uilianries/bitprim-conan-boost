@@ -3,7 +3,7 @@ import os
 import platform
 
 if __name__ == "__main__":
-    builder = ConanMultiPackager(username="bitprim", channel="stable", archs="[x86_64]")
+    builder = ConanMultiPackager(username="bitprim", channel="stable", archs=["x86_64"])
     builder.add_common_builds(shared_option_name="bitprim-conan-boost:shared", pure_c=False)
 
     filtered_builds = []
