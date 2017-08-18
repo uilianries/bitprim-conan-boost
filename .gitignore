@@ -1,2 +1,5 @@
 __pycache__/
 test_package/build/
+build/
+conanbuildinfo.cmake
+conaninfo.txt
