@@ -20,8 +20,7 @@ if __name__ == "__main__":
                 if not "compiler.libcxx" in settings or settings["compiler"] == "apple-clang" or ("compiler.libcxx" in settings and settings["compiler.libcxx"] == "libstdc++"):
                     filtered_builds.append([settings, options, env_vars, build_requires])
 
+    builder.builds = filtered_builds
     if add_special_case:
         builder.add(settings={'compiler.version': '4.9', 'compiler.libcxx': 'libstdc++11', 'arch': 'x86_64', 'build_type': 'Release', 'compiler': 'gcc'}, options={'bitprim-conan-boost:shared': False})
-
-    builder.builds = filtered_builds
     builder.run()
