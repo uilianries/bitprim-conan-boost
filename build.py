@@ -5,7 +5,9 @@ import platform
 if __name__ == "__main__":
     #TODO Specify combinations here using archs argument
     builder = ConanMultiPackager(username="bitprim", channel="stable")
-    builder.add_common_builds(shared_option_name="bitprim-conan-boost:shared")
+    builder.add_common_builds(shared_option_name="bitprim-conan-boost:shared", pure_c=False)
+    #builder.password = os.getenv("CONAN_PASSWORD") #Redundant
+
 
     filtered_builds = []
     for settings, options, env_vars, build_requires in builder.builds:
