@@ -46,7 +46,6 @@ class BitprimconanboostConan(ConanFile):
         "without_container": [True, False],
         "without_context": [True, False],
         "without_coroutine": [True, False],
-        # "without_coroutine2": [True, False],
         "without_date_time": [True, False],
         "without_exception": [True, False],
         "without_fiber": [True, False],
@@ -84,9 +83,6 @@ class BitprimconanboostConan(ConanFile):
         "without_container=True", \
         "without_context=True", \
         "without_coroutine=True", \
-        
-        # "without_coroutine2=True", \
-        
         "without_date_time=False", \
         "without_exception=False", \
         "without_fiber=True", \
@@ -104,9 +100,7 @@ class BitprimconanboostConan(ConanFile):
         "without_regex=False", \
         "without_serialization=True", \
         "without_signals=True", \
-
         "without_stacktrace=True", \
-        
         "without_system=False", \
         "without_test=False", \
         "without_thread=False", \
@@ -120,9 +114,6 @@ class BitprimconanboostConan(ConanFile):
         "container": ["container"],
         "context": ["context"],
         "coroutine": ["coroutine"],
-        
-        # "coroutine2": ["coroutine2"],
-        
         "date_time": ["date_time"],
         "exception": ["exception"],
         "fiber": ["fiber"],
@@ -202,7 +193,6 @@ class BitprimconanboostConan(ConanFile):
             "--without-container": self.options.without_container,
             "--without-context": self.options.without_context,
             "--without-coroutine": self.options.without_coroutine,
-            # "--without-coroutine2": self.options.without_coroutine2,
             "--without-date_time": self.options.without_date_time,
             "--without-exception": self.options.without_exception,
             "--without-fiber": self.options.without_fiber,
