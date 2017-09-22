@@ -6,7 +6,7 @@ if __name__ == "__main__":
 
     filtered_builds = []
     for settings, options, env_vars, build_requires in builder.builds:
-        if settings["build_type"] == "Release" \
+        if (settings["build_type"] == "Release" or settings["build_type"] == "Debug") \
                 and not options["bitprim-conan-boost:shared"]:
 
             filtered_builds.append([settings, options, env_vars, build_requires])
