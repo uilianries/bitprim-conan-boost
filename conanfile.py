@@ -64,9 +64,6 @@ class BitprimconanboostConan(ConanFile):
         "without_regex": [True, False],
         "without_serialization": [True, False],
         "without_signals": [True, False],
-        
-#         "without_stacktrace": [True, False],
-
         "without_system": [True, False],
         "without_test": [True, False],
         "without_thread": [True, False],
@@ -101,7 +98,6 @@ class BitprimconanboostConan(ConanFile):
         "without_regex=False", \
         "without_serialization=True", \
         "without_signals=True", \
-#         "without_stacktrace=True", \
         "without_system=False", \
         "without_test=False", \
         "without_thread=False", \
@@ -132,9 +128,6 @@ class BitprimconanboostConan(ConanFile):
         "regex": ["regex"],
         "serialization": ["serialization", "wserialization"],
         "signals": ["signals"],
-        
-#         "stacktrace": ["stacktrace"],
-        
         "system": ["system"],
         "test": ["unit_test_framework", "prg_exec_monitor", "test_exec_monitor"],
         "thread": ["thread"],
@@ -211,9 +204,6 @@ class BitprimconanboostConan(ConanFile):
             "--without-regex": self.options.without_regex,
             "--without-serialization": self.options.without_serialization,
             "--without-signals": self.options.without_signals,
-            
-#             "--without-stacktrace": self.options.without_stacktrace,
-
             "--without-system": self.options.without_system,
             "--without-test": self.options.without_test,
             "--without-thread": self.options.without_thread,
