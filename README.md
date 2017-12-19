@@ -3,3 +3,5 @@
 # bitprim-conan-boost
 
 Parameterized Conan recipe for Boost
+
+### LICENSE
